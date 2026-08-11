@@ -1,0 +1,103 @@
+{
+    "default_engine": {
+        "description": "默认生成引擎：local=本地程序化生成（无需 Key），ai=AI 文生 3D（需配置 API Key）",
+        "type": "string",
+        "options": ["local", "ai"],
+        "labels": ["本地程序化生成", "AI 文生 3D"],
+        "default": "local"
+    },
+    "default_format": {
+        "description": "默认导出格式：stl=3D 打印标准格式，obj=通用模型格式，glb=游戏/网页常用格式",
+        "type": "string",
+        "options": ["stl", "obj", "glb"],
+        "labels": ["STL", "OBJ", "GLB"],
+        "default": "stl"
+    },
+    "ai_provider": {
+        "description": "AI 文生 3D 服务商：tripo=Tripo AI（免费额度），meshy=Meshy AI，hunyuan=腾讯混元（云 API 或本地部署开源模型）",
+        "type": "string",
+        "options": ["tripo", "meshy", "hunyuan"],
+        "labels": ["Tripo AI", "Meshy AI", "腾讯混元 Hunyuan3D"],
+        "default": "tripo"
+    },
+    "tripo_api_key": {
+        "description": "Tripo AI API Key（platform.tripo3d.ai 注册获取，有免费额度）。留空则 AI 生成不可用",
+        "type": "string",
+        "default": "",
+        "hint": "sk-..."
+    },
+    "meshy_api_key": {
+        "description": "Meshy AI API Key（meshy.ai 注册获取）。留空则 Meshy 不可用",
+        "type": "string",
+        "default": "",
+        "hint": "meshy-..."
+    },
+    "hunyuan_mode": {
+        "description": "腾讯混元接入方式：cloud=腾讯云官方 API（需 SecretId/Key，有免费额度），local=本地部署开源模型（Hunyuan3D-2，免费但需 GPU）",
+        "type": "string",
+        "options": ["cloud", "local"],
+        "labels": ["腾讯云 API", "本地部署开源模型"],
+        "default": "cloud"
+    },
+    "hunyuan_secret_id": {
+        "description": "腾讯云 SecretId（混元生3D API 认证用，cloud 模式下必填）。开通地址：cloud.tencent.com/product/1804",
+        "type": "string",
+        "default": "",
+        "hint": "AKID..."
+    },
+    "hunyuan_secret_key": {
+        "description": "腾讯云 SecretKey（与 SecretId 配对，cloud 模式下必填）",
+        "type": "string",
+        "default": "",
+        "hint": "仅用于 TC3 签名，请妥善保管"
+    },
+    "hunyuan_local_url": {
+        "description": "本地部署的 Hunyuan3D-2 api_server 地址（local 模式下使用）。部署见 README：git clone Tencent-Hunyuan/Hunyuan3D-2 && python api_server.py --port 8080",
+        "type": "string",
+        "default": "http://127.0.0.1:8080",
+        "hint": "http://127.0.0.1:8080"
+    },
+    "hunyuan_result_format": {
+        "description": "混元生成结果的模型格式（腾讯云 API 支持 OBJ/GLB/STL/USDZ/FBX/MP4；本地部署固定返回 GLB）",
+        "type": "string",
+        "options": ["GLB", "OBJ", "STL", "USDZ", "FBX"],
+        "labels": ["GLB", "OBJ", "STL", "USDZ", "FBX"],
+        "default": "GLB"
+    },
+    "hunyuan_enable_pbr": {
+        "description": "混元是否开启 PBR 材质生成（cloud 模式有效，开启后纹理更真实）",
+        "type": "bool",
+        "default": false
+    },
+    "hunyuan_use_pro": {
+        "description": "混元使用专业版接口（SubmitHunyuanTo3DJob）而非极速版：质量更高但更慢更贵",
+        "type": "bool",
+        "default": false
+    },
+    "ai_model": {
+        "description": "AI 生成使用的模型（Tripo 建议 tripo-2.5；Meshy 建议 meshy-4）",
+        "type": "string",
+        "default": "tripo-2.5",
+        "hint": "不同服务商使用各自的模型名"
+    },
+    "send_preview_image": {
+        "description": "是否在聊天中发送渲染的 PNG 预览图",
+        "type": "bool",
+        "default": true
+    },
+    "send_model_file": {
+        "description": "是否在聊天中发送模型文件（STL/OBJ/GLB）",
+        "type": "bool",
+        "default": true
+    },
+    "send_html_preview": {
+        "description": "是否发送可旋转查看的 3D 交互预览页（HTML）",
+        "type": "bool",
+        "default": false
+    },
+    "max_triangle_count": {
+        "description": "本地生成时三角形的上限（防止模型过大导致聊天卡顿）",
+        "type": "int",
+        "default": 60000
+    }
+}
